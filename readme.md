@@ -41,7 +41,7 @@ cd lang101_assignment_5
 bash run_script-lda_reddit.sh
 ```  
 ### Running on windows without a bash emulator  
-If you're running on a local window machine, and don't have a bash emulator, you must set up a virtual environment, activate it, upgrade pip, install dependencies (requirements.txt), unzip the file “r_wallstreetbets_posts.csv.zip”, and then run the python script manually from the src folder.  
+If you're running on a local window machine, and don't have a bash emulator, you must set up a virtual environment, activate it, upgrade pip, install dependencies (requirements.txt and SpaCy's [en_core_web_sm](https://spacy.io/models/en) NLP model), unzip the file “r_wallstreetbets_posts.csv.zip”, and then run the python script manually from the src folder.  
 
 ### Output
 The bash scripts will save an HTML file with a dashboard of topics, a plot that shows how well the models performs based on number of topics, a CSV file with keywords related to each topic, and a chart that shows how the topics have changed over time (5 days rolling average). All files are located in the folder "output".
