@@ -175,7 +175,8 @@ def main():
                                                                       dictionary=id2word,  
                                                                       start=2, 
                                                                       limit= test_limit,  
-                                                                      step=2)
+                                                                      step=2,
+                                                                      output = os.path.join("..", "output", "coherence_values.png"))
     print("Building lda model ...")
     # Build LDA model
     lda_model = gensim.models.LdaMulticore(corpus=corpus, # vectorized corpus - list of lists of tupples
@@ -187,9 +188,6 @@ def main():
                                            iterations=100, # How often are we going over a single document. (Related to passes)
                                            per_word_topics=True,  # Define word distributions 
                                            minimum_probability=0.0) # Minimum value. Include topics with zero probability
-    
-    # Compute Perplexity and print it to terminal
-    print('\nPerplexity: ', lda_model.log_perplexity(corpus))  # a measure of how good the model is. lower the better.
 
     # Compute Coherence Score
     coherence_model_lda = CoherenceModel(model=lda_model, 
@@ -197,12 +195,8 @@ def main():
                                      dictionary=id2word, 
                                      coherence='c_v')
     
-    #Print coherence the higher the better
+    #Get coherence scores (used for prining to terminal)
     coherence_lda = coherence_model_lda.get_coherence()
-    print('\nCoherence Score: ', coherence_lda)
-    
-    #Print topics
-    pprint(lda_model.print_topics())
     
     #Create interactive board of topics
     vis = pyLDAvis.gensim.prepare(lda_model, corpus, dictionary=lda_model.id2word)
@@ -286,6 +280,16 @@ def main():
     #save as csv
     file_path = os.path.join("..", "output", "topics_contribution.csv")
     sent_topics_sorteddf.to_csv(file_path)
+    
+    """
+    ------------- Print to terminal ------------
+    """
+    #Print coherence the higher the better
+    print('\nCoherence Score: ', coherence_lda)
+    #Print topics
+    pprint(lda_model.print_topics())
+    # Compute Perplexity and print it to terminal
+    print('\nPerplexity: ', lda_model.log_perplexity(corpus))  # a measure of how good the model is. lower the better.
     
 #Define behaviour when called from commandline
 if __name__ == "__main__":

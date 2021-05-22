@@ -2,6 +2,7 @@
 """
 Utility functions for working with LDA using gensim
 """
+import os
 # NLP
 import re
 import nltk
@@ -17,15 +18,8 @@ from gensim.utils import simple_preprocess
 from gensim.models import CoherenceModel
 # matplotlib
 import matplotlib.pyplot as plt
-
-def sent_to_words(sentences):
-    for sent in sentences:
-        sent = re.sub(r'\S*@\S*\s?', '', sent)  # remove emails
-        sent = re.sub(r'\s+', ' ', sent)  # remove newline chars
-        sent = re.sub(r"\'", "", sent)  # remove single quotes
-        sent = gensim.utils.simple_preprocess(str(sent), deacc=True) 
-        yield(sent) 
-        
+import warnings
+warnings.filterwarnings('ignore')
 
 def process_words(texts, nlp, bigram_mod, trigram_mod, stop_words=stop_words, allowed_postags=['NOUN', "ADJ", "VERB", "ADV"]):
     """Remove Stopwords, Form Bigrams, Trigrams and Lemmatization"""
@@ -40,7 +34,7 @@ def process_words(texts, nlp, bigram_mod, trigram_mod, stop_words=stop_words, al
         texts_out.append([token.lemma_ for token in doc if token.pos_ in allowed_postags]) 
     return texts_out
 
-def compute_coherence_values(dictionary, corpus, texts, limit, start=2, step=3):
+def compute_coherence_values(dictionary, corpus, texts, limit, start=2, step=3, output = "coherence_values.png"):
     """
     Compute c_v coherence for various number of topics
 
@@ -70,7 +64,7 @@ def compute_coherence_values(dictionary, corpus, texts, limit, start=2, step=3):
     plt.ylabel("Coherence score")
     plt.legend(("coherence_values"), loc='best')
     plt.show()
-    plt.savefig("../output/coherence_values.png")
+    plt.savefig(output)
     # Print the coherence scores
     for m, cv in zip(x, coherence_values):
         print("Num Topics =", m, " has Coherence Value of", round(cv, 4))
