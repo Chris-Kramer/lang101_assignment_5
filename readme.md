@@ -68,8 +68,3 @@ _Without bash script:_
 ```console
 python lda_reddit.py --start_date 2020 12 1 --end_date 2021 2 17 --rolling_avg 10 --topics 6
 ```  
-
-### Conclusion / Discussion
-My analysis is only preliminary. However, from a purely computational and statistical point of view, my model preformed better (lower perplexity and higher coherence) when I had 4 topics, however from a human readability perspective the topics seemed more coherent and understandable when using 3 topics. When I had more than 3 topics, my model tended to cluster a few very dominant topics together and then have a lot of topics which only made up a fraction of the overall topics.  
-This clustering made me worry that my model made mistakes, however after looking at the pyLDAvis board I realised, that the dominant topics where exlusively related to gamestop stocks and the gamestop saga, while the less prominent topics, where related to the gamestop saga AND a few other stocks. This indicates that the gamestop saga was so dominant, that it essentially created a hegemonic discourse.  
-When looking at the three topics it is clear, that topic 0 and 1 are related to gamestop and buying stocks, while topic 2 (which is more or less non-existing until the 8th of february) also relates to other stocks. It is also interesting to note that topic 2 contains a lot of words related to mariuanna (weed, pot, cannabis etc.). This indicates that the redditors gained interest in stocks related to mariuanna, once the gamestop stocks started to lose their value. 
