@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 echo "Creating environment"
+VENVNAME=as5-venv 
 python -m venv $VENVNAME
 
 # This makes sure that the bash script can be run from bash emulator on windows 
