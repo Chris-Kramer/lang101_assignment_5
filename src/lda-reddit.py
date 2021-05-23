@@ -242,11 +242,9 @@ def main():
     plt.ylabel("Topic dominance")
     #Set layout to be tight
     plt.tight_layout()
-    #Show plt figure (otherwise plt parameters won't be displayed)
-    plt.show()
     #save figure
     file_path = os.path.join("..", "output", "Topic_over_time-Lineplot.png")
-    plt.savefig(file_path)
+    lineplot.savefig(file_path)
     
     """
     ----------- Make dataframe for csv output ----------

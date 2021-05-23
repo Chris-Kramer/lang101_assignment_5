@@ -63,8 +63,9 @@ def compute_coherence_values(dictionary, corpus, texts, limit, start=2, step=3, 
     plt.xlabel("Num Topics")
     plt.ylabel("Coherence score")
     plt.legend(("coherence_values"), loc='best')
-    plt.show()
     plt.savefig(output)
+    plt.show()
+    
     # Print the coherence scores
     for m, cv in zip(x, coherence_values):
         print("Num Topics =", m, " has Coherence Value of", round(cv, 4))
